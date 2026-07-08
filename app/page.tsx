@@ -19,8 +19,12 @@ export default function HomePage() {
         </p>
 
         <div className="actions">
-          <span className="gols-btn-primary">Sign in (coming soon)</span>
-          <span className="gols-btn-secondary">View orders (coming soon)</span>
+          <a className="gols-btn-primary" href="/login">
+            Log in
+          </a>
+          <a className="gols-btn-secondary" href="/signup">
+            Create account
+          </a>
         </div>
 
         {missingSecrets.length > 0 && config.appEnv === 'development' && (

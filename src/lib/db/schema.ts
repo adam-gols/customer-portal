@@ -16,3 +16,13 @@ export const orders = pgTable('orders', {
   stripePaymentIntentId: varchar('stripe_payment_intent_id', { length: 255 }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+export const sessions = pgTable('sessions', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id),
+  tokenHash: text('token_hash').notNull().unique(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+});

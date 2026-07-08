@@ -12,15 +12,21 @@ const configSchema = z.object({
 
 export type AppConfig = z.infer<typeof configSchema>;
 
+function emptyToUndefined(value: string | undefined) {
+  if (!value) return undefined;
+  const trimmed = value.trim();
+  return trimmed ? trimmed : undefined;
+}
+
 export function getConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   return configSchema.parse({
-    appEnv: env.APP_ENV ?? 'development',
-    appPort: env.APP_PORT ?? '3000',
-    databaseUrl: env.DATABASE_URL,
-    sessionSecret: env.SESSION_SECRET,
-    stripeSecretKey: env.STRIPE_SECRET_KEY,
-    stripePublishableKey: env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-    stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
+    appEnv: emptyToUndefined(env.APP_ENV) ?? 'development',
+    appPort: emptyToUndefined(env.APP_PORT) ?? '3000',
+    databaseUrl: emptyToUndefined(env.DATABASE_URL),
+    sessionSecret: emptyToUndefined(env.SESSION_SECRET),
+    stripeSecretKey: emptyToUndefined(env.STRIPE_SECRET_KEY),
+    stripePublishableKey: emptyToUndefined(env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY),
+    stripeWebhookSecret: emptyToUndefined(env.STRIPE_WEBHOOK_SECRET),
   });
 }
 
