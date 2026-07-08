@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { LogoutButton } from '@/components/LogoutButton';
 import { getCurrentUser } from '@/lib/auth/current-user';
@@ -34,12 +33,12 @@ export default async function HomePage() {
           </div>
         ) : (
           <div className="actions">
-            <Link className="gols-btn-primary" href="/login">
+            <a className="gols-btn-primary" href="/login">
               Log in
-            </Link>
-            <Link className="gols-btn-secondary" href="/signup">
+            </a>
+            <a className="gols-btn-secondary" href="/signup">
               Create account
-            </Link>
+            </a>
           </div>
         )}
 

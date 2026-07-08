@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
 import { SignupForm } from '@/components/auth/SignupForm';
+import { AlreadySignedIn } from '@/components/auth/AlreadySignedIn';
 import { getCurrentUser } from '@/lib/auth/current-user';
 
 type SignupPageProps = {
@@ -9,7 +9,7 @@ type SignupPageProps = {
 export default async function SignupPage({ searchParams }: SignupPageProps) {
   const user = await getCurrentUser();
   if (user) {
-    redirect('/');
+    return <AlreadySignedIn email={user.email} />;
   }
 
   const params = await searchParams;

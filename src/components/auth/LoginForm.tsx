@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { formatApiError } from '@/lib/auth/errors';
+import { useStripPasswordFromUrl } from '@/components/auth/useStripPasswordFromUrl';
 
 type LoginFormProps = {
   defaultEmail?: string;
 };
 
 export function LoginForm({ defaultEmail = '' }: LoginFormProps) {
+  useStripPasswordFromUrl();
   const [email, setEmail] = useState(defaultEmail);
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +66,7 @@ export function LoginForm({ defaultEmail = '' }: LoginFormProps) {
         Sign in to view your orders and purchases.
       </p>
 
-      <form onSubmit={onSubmit} style={{ display: 'grid', gap: '0.9rem' }}>
+      <form method="post" onSubmit={onSubmit} style={{ display: 'grid', gap: '0.9rem' }}>
         {error && (
           <div className="auth-alert auth-alert-error" role="alert">
             {error}
