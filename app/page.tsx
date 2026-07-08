@@ -1,9 +1,14 @@
 import { Logo } from '@/components/Logo';
+import { LogoutButton } from '@/components/LogoutButton';
+import { getCurrentUser } from '@/lib/auth/current-user';
 import { getConfig, getMissingSecrets } from '@/lib/config';
 
-export default function HomePage() {
+export const dynamic = 'force-dynamic';
+
+export default async function HomePage() {
   const config = getConfig();
   const missingSecrets = getMissingSecrets(config);
+  const user = await getCurrentUser();
 
   return (
     <div className="page">
@@ -18,10 +23,24 @@ export default function HomePage() {
           Sign up, view your orders, and purchase GOLS products — all in one customer portal.
         </p>
 
-        <div className="actions">
-          <span className="gols-btn-primary">Sign in (coming soon)</span>
-          <span className="gols-btn-secondary">View orders (coming soon)</span>
-        </div>
+        {user ? (
+          <div className="actions">
+            <p>
+              Signed in as <strong>{user.email}</strong>
+            </p>
+            <span className="gols-btn-secondary">View orders (coming soon)</span>
+            <LogoutButton />
+          </div>
+        ) : (
+          <div className="actions">
+            <a className="gols-btn-primary" href="/login">
+              Log in
+            </a>
+            <a className="gols-btn-secondary" href="/signup">
+              Create account
+            </a>
+          </div>
+        )}
 
         {missingSecrets.length > 0 && config.appEnv === 'development' && (
           <aside className="dev-notice" role="status">

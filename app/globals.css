@@ -43,10 +43,37 @@
   display: inline-block;
   border: 2px solid var(--gols-zodiac-blue);
   color: var(--gols-zodiac-blue);
+  background: transparent;
   padding: 0.75rem 1.5rem;
   font-family: var(--gols-font-heading);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gols-btn-secondary:hover {
+  opacity: 0.92;
+}
+
+.actions p {
+  margin: 0;
+  align-self: center;
+}
+
+.auth-alert {
+  padding: 0.85rem 0.95rem;
+  font-size: 0.95rem;
+}
+
+.auth-alert-error {
+  background: var(--gols-gallery-grey);
+  border-left: 4px solid var(--gols-cardinal-red);
+}
+
+.auth-alert-success {
+  background: var(--gols-gallery-grey);
+  border-left: 4px solid var(--gols-william-green);
 }
 
 .dev-notice {

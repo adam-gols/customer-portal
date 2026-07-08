@@ -156,3 +156,7 @@ New packages require:
 1. Justification in PR or ADR
 2. Fit with stack table above
 3. Active maintenance
+
+Current additions:
+
+- `bcryptjs` — password hashing for customer signup/login
