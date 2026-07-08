@@ -21,7 +21,8 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const parsed = signupSchema.safeParse(body);
   if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
+    const message = parsed.error.issues[0]?.message ?? 'Invalid sign up details';
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 
   const { email, password } = parsed.data;

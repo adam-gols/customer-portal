@@ -2,11 +2,18 @@ import { redirect } from 'next/navigation';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { getCurrentUser } from '@/lib/auth/current-user';
 
-export default async function LoginPage() {
+type LoginPageProps = {
+  searchParams: Promise<{ email?: string }>;
+};
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
   const user = await getCurrentUser();
   if (user) {
     redirect('/');
   }
 
-  return <LoginForm />;
+  const params = await searchParams;
+  const defaultEmail = params.email?.trim() ?? '';
+
+  return <LoginForm defaultEmail={defaultEmail} />;
 }

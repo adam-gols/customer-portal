@@ -61,6 +61,21 @@
   align-self: center;
 }
 
+.auth-alert {
+  padding: 0.85rem 0.95rem;
+  font-size: 0.95rem;
+}
+
+.auth-alert-error {
+  background: var(--gols-gallery-grey);
+  border-left: 4px solid var(--gols-cardinal-red);
+}
+
+.auth-alert-success {
+  background: var(--gols-gallery-grey);
+  border-left: 4px solid var(--gols-william-green);
+}
+
 .dev-notice {
   margin-top: 2.5rem;
   padding: 1rem 1.25rem;

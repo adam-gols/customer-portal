@@ -3,39 +3,55 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
+import { formatApiError } from '@/lib/auth/errors';
 
-function formatError(error: unknown): string {
-  if (typeof error === 'string') return error;
-  return 'Log in failed';
-}
+type LoginFormProps = {
+  defaultEmail?: string;
+};
 
-export function LoginForm() {
-  const [email, setEmail] = useState('');
+export function LoginForm({ defaultEmail = '' }: LoginFormProps) {
+  const [email, setEmail] = useState(defaultEmail);
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const signupHref = email.trim() ? `/signup?email=${encodeURIComponent(email.trim())}` : '/signup';
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+    setSuccess(false);
     setSubmitting(true);
 
     try {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({ email, password }),
       });
 
+      const payload = await res.json().catch(() => null);
+
       if (!res.ok) {
-        const payload = await res.json().catch(() => null);
-        setError(formatError(payload?.error));
+        setError(formatApiError(payload?.error, 'Log in failed. Check your email and password.'));
         return;
       }
 
-      window.location.assign('/');
+      const me = await fetch('/api/auth/me', { credentials: 'same-origin' });
+      const meData = await me.json().catch(() => null);
+      if (!meData?.user) {
+        setError('Log in succeeded, but your session was not saved. Please try again.');
+        return;
+      }
+
+      setSuccess(true);
+      window.setTimeout(() => {
+        window.location.assign('/');
+      }, 400);
     } catch {
-      setError('Unexpected error');
+      setError('Unexpected error. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -49,13 +65,28 @@ export function LoginForm() {
       </p>
 
       <form onSubmit={onSubmit} style={{ display: 'grid', gap: '0.9rem' }}>
+        {error && (
+          <div className="auth-alert auth-alert-error" role="alert">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="auth-alert auth-alert-success" role="status">
+            Signed in. Redirecting…
+          </div>
+        )}
+
         <label style={{ display: 'grid', gap: 6 }}>
           <span>Email</span>
           <input
+            name="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             required
+            disabled={submitting || success}
             style={{
               padding: '0.75rem 0.9rem',
               borderRadius: 10,
@@ -67,11 +98,14 @@ export function LoginForm() {
         <label style={{ display: 'grid', gap: 6 }}>
           <span>Password</span>
           <input
+            name="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             required
             minLength={8}
+            disabled={submitting || success}
             style={{
               padding: '0.75rem 0.9rem',
               borderRadius: 10,
@@ -80,30 +114,18 @@ export function LoginForm() {
           />
         </label>
 
-        {error && (
-          <div
-            style={{
-              padding: '0.85rem 0.95rem',
-              background: 'var(--gols-gallery-grey)',
-              borderLeft: '4px solid var(--gols-cardinal-red)',
-            }}
-          >
-            {error}
-          </div>
-        )}
-
         <button
           className="gols-btn-primary"
           type="submit"
-          disabled={submitting}
+          disabled={submitting || success}
           style={{ width: 'fit-content' }}
         >
-          {submitting ? 'Signing in…' : 'Log in'}
+          {submitting ? 'Signing in…' : success ? 'Signed in' : 'Log in'}
         </button>
 
         <p style={{ marginTop: '0.5rem' }}>
           Need an account?{' '}
-          <Link href="/signup" style={{ color: 'var(--gols-zodiac-blue)' }}>
+          <Link href={signupHref} style={{ color: 'var(--gols-zodiac-blue)' }}>
             Create one
           </Link>
         </p>
