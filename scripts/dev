@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo "Placeholder: replace during bootstrap (Phase 2)."
-echo "See docs/bootstrap-spec.md and docs/setup.md."
-echo ""
-echo "Expected: start local development server for chosen stack."
-exit 1
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "pnpm is required. Install: https://pnpm.io/installation"
+  exit 1
+fi
+
+if [[ ! -d node_modules ]]; then
+  echo "Installing dependencies..."
+  pnpm install
+fi
+
+export APP_PORT="${APP_PORT:-3000}"
+exec pnpm dev

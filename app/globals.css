@@ -1,0 +1,65 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--gols-gallery-grey);
+  background: #fff;
+}
+
+.main {
+  flex: 1;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.eyebrow {
+  font-family: var(--gols-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gols-william-green);
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+}
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.gols-btn-secondary {
+  display: inline-block;
+  border: 2px solid var(--gols-zodiac-blue);
+  color: var(--gols-zodiac-blue);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--gols-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dev-notice {
+  margin-top: 2.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--gols-gallery-grey);
+  border-left: 4px solid var(--gols-picton-blue);
+  font-size: 0.9rem;
+}
+
+.footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--gols-gallery-grey);
+  color: var(--gols-pumice-grey);
+  font-size: 0.875rem;
+}

@@ -6,23 +6,23 @@ Fill this in **before** scaffolding. Agents and humans use this as the source of
 
 | Field | Value |
 |-------|-------|
-| Project name | `[PROJECT_NAME]` |
-| Project type | `[ ] web-app` `[ ] api` `[ ] cli` `[ ] mobile` `[ ] monorepo` `[ ] library` |
-| Primary language | `[AI-selected — TypeScript / Python / Go / etc.]` |
-| Language rationale | `[One line — why this language fits]` |
-| License | `[MIT / Apache-2.0 / proprietary / other]` |
+| Project name | GOLS Connect |
+| Project type | `[x] web-app` `[ ] api` `[ ] cli` `[ ] mobile` `[ ] monorepo` `[ ] library` |
+| Primary language | TypeScript |
+| Language rationale | Web app with Stripe checkout, account auth, and order UI — TypeScript + React ecosystem fits best. |
+| License | `proprietary` |
 
 ## Repository
 
 | Field | Value |
 |-------|-------|
-| Project slug | `[my-app]` |
-| Local path | `~/Documents/[my-app]` |
+| Project slug | `customer-portal` |
+| Local path | `~/Documents/customer-portal` |
 | Git initialized | `yes` |
 | GitHub remote | `yes` (always) |
-| Remote URL | `[https://github.com/user/my-app]` |
+| Remote URL | `https://github.com/adam-gols/customer-portal` |
 | Default branch | `main` |
-| Visibility | `[private/public]` |
+| Visibility | `public` |
 
 ## Stack choices
 
@@ -31,7 +31,7 @@ Pick **one per row** (mark with `[x]`). Delete unused rows in a copy if helpful.
 ### Frontend (skip if none)
 
 - [ ] None
-- [ ] Next.js (App Router)
+- [x] Next.js (App Router)
 - [ ] Vite + React
 - [ ] Vite + Vue
 - [ ] Other: `___`
@@ -44,38 +44,38 @@ Pick **one per row** (mark with `[x]`). Delete unused rows in a copy if helpful.
 - [ ] Python — FastAPI
 - [ ] Python — Django
 - [ ] Go — stdlib / chi
-- [ ] Other: `___`
+- [x] Other: `Next.js API routes / server actions`
 
 ### Data (skip if none)
 
 - [ ] None
-- [ ] PostgreSQL
+- [x] PostgreSQL
 - [ ] SQLite
 - [ ] MongoDB
-- [ ] ORM/query layer: `[Prisma / Drizzle / SQLAlchemy / none]`
+- [x] ORM/query layer: `Drizzle`
 
 ### Auth (skip if none)
 
 - [ ] None for now
 - [ ] Clerk
 - [ ] Auth0
-- [ ] Custom JWT/session
+- [x] Custom JWT/session
 - [ ] Other: `___`
 
 ### Testing
 
 | Layer | Choice |
 |-------|--------|
-| Unit/integration | `[Vitest / Jest / pytest / go test / other]` |
-| E2E (optional) | `[Playwright / Cypress / none]` |
+| Unit/integration | `Vitest` |
+| E2E (optional) | `Playwright` |
 
 ### Tooling
 
 | Tool | Choice |
 |------|--------|
-| Package manager | `[pnpm / npm / yarn / pip / poetry / go mod]` |
-| Lint | `[ESLint / Ruff / golangci-lint / none]` |
-| Format | `[Prettier / Black / gofmt / none]` |
+| Package manager | `pnpm` |
+| Lint | `ESLint` |
+| Format | `Prettier` |
 
 ## Non-negotiables
 

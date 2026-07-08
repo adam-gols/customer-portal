@@ -1,0 +1,53 @@
+/* GOLS brand CSS variables — from brand/tokens.json */
+
+:root {
+  --gols-cardinal-red: #c62128;
+  --gols-black: #000000;
+  --gols-pumice-grey: #c7c9c7;
+  --gols-gallery-grey: #f0efef;
+  --gols-william-green: #37605f;
+  --gols-zodiac-blue: #0f1c41;
+  --gols-picton-blue: #4dc7e4;
+
+  --gols-font-display: var(--font-orbitron), 'Orbitron', sans-serif;
+  --gols-font-heading: var(--font-oswald), 'Oswald', sans-serif;
+  --gols-font-body: var(--font-roboto), 'Roboto', sans-serif;
+
+  --gols-color-primary: var(--gols-cardinal-red);
+  --gols-color-text: var(--gols-black);
+  --gols-color-bg: #ffffff;
+  --gols-color-bg-muted: var(--gols-gallery-grey);
+}
+
+body {
+  font-family: var(--gols-font-body);
+  color: var(--gols-color-text);
+  background: var(--gols-color-bg);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--gols-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.gols-btn-primary {
+  display: inline-block;
+  background: var(--gols-cardinal-red);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--gols-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gols-btn-primary:hover {
+  opacity: 0.92;
+}
