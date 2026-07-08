@@ -43,10 +43,22 @@
   display: inline-block;
   border: 2px solid var(--gols-zodiac-blue);
   color: var(--gols-zodiac-blue);
+  background: transparent;
   padding: 0.75rem 1.5rem;
   font-family: var(--gols-font-heading);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gols-btn-secondary:hover {
+  opacity: 0.92;
+}
+
+.actions p {
+  margin: 0;
+  align-self: center;
 }
 
 .dev-notice {

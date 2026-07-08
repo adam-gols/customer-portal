@@ -4,6 +4,8 @@ import { LogoutButton } from '@/components/LogoutButton';
 import { getCurrentUser } from '@/lib/auth/current-user';
 import { getConfig, getMissingSecrets } from '@/lib/config';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const config = getConfig();
   const missingSecrets = getMissingSecrets(config);
@@ -24,7 +26,7 @@ export default async function HomePage() {
 
         {user ? (
           <div className="actions">
-            <p style={{ margin: 0 }}>
+            <p>
               Signed in as <strong>{user.email}</strong>
             </p>
             <span className="gols-btn-secondary">View orders (coming soon)</span>

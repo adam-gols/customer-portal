@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 
@@ -11,7 +10,6 @@ function formatError(error: unknown): string {
 }
 
 export function SignupForm() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -35,8 +33,7 @@ export function SignupForm() {
         return;
       }
 
-      router.push('/');
-      router.refresh();
+      window.location.assign('/');
     } catch {
       setError('Unexpected error');
     } finally {
