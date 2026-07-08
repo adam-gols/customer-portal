@@ -30,7 +30,7 @@ fi
 echo "Expected mount path:   $MOUNT_PATH"
 echo ""
 
-if [[ ! -f "$ENV_FILE" ]]; then
+if [[ ! -e "$ENV_FILE" ]]; then
   echo "No .env found at project root."
   echo ""
   echo "Mount your 1Password Environment:"
@@ -50,6 +50,12 @@ if [[ ! -f "$ENV_FILE" ]]; then
 fi
 
 echo "Found .env at project root."
+if [[ -p "$ENV_FILE" ]]; then
+  echo ""
+  echo "Type: 1Password mount (named pipe) — this is expected."
+  echo "Cursor may label it an 'unknown' file; you cannot edit it here."
+  echo "Change secrets in 1Password → Environments → $ENV_NAME"
+fi
 echo ""
 echo "Verify the mount works:"
 echo "  cat .env"
